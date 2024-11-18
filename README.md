@@ -13,28 +13,19 @@ Cuando vamos a un restaurante, a menudo se nos presenta la necesidad de calcular
 # Funciones principales:
 
 1. **Ingreso del monto total de la cuenta:**
-   - El programa debe permitir al usuario ingresar el monto total de la cuenta del restaurante.
+   - El programa permite al usuario ingresar el monto total de la cuenta del restaurante.
 2. **Selección del porcentaje de propina:**
-   - El usuario debe poder seleccionar el porcentaje de propina que desea dejar (por ejemplo, 10%, 15%, 20%). También se puede agregar la opción de ingresar un porcentaje personalizado.
+   - El usuario puede seleccionar el porcentaje de propina que desea dejar (por ejemplo, 10%, 15%, 20%).
 3. **Cálculo de la propina:**
-   - Con el monto total y el porcentaje seleccionado, el programa debe calcular el valor de la propina.
+   - Con el monto total y el porcentaje seleccionado, el programa calcula el valor de la propina.
 4. **Cálculo del total a pagar:**
-   - El programa debe sumar el monto de la propina al total de la cuenta para mostrar el total que el usuario debe pagar.
-5. **División del total entre varias personas (opcional):**
-   - El programa debe permitir al usuario ingresar la cantidad de personas que van a pagar la cuenta, y dividir el total (incluyendo propina) entre ellas, calculando cuánto le corresponde a cada persona.
-6. **Mostrar resultados:**
-   - El programa debe mostrar:
-     - La cantidad de propina calculada.
-     - El total con la propina incluida.
-     - Si es necesario, el monto que le corresponde pagar a cada persona.
-
-**Ejemplo de flujo:**
-
-1. El usuario ingresa el monto de la cuenta (por ejemplo, $50).
-2. Elige el porcentaje de propina (por ejemplo, 15%).
-3. El programa calcula la propina (en este caso, $7.50) y el total a pagar (en este caso, $57.50).
-4. Si el usuario desea dividir la cuenta entre varias personas (por ejemplo, 4 personas), el programa muestra que cada persona debe pagar $14.38.
-   
+   - El programa suma el monto de la propina al total de la cuenta para mostrar el total que el usuario debe pagar.
+5. **División del total entre varias personas:**
+   - El programa permite al usuario ingresar la cantidad de personas que van a pagar la cuenta.
+6. **Gestión de registros de propinas:**
+   - Permite guardar, ver, actualizar y eliminar registros de propinas anteriores.
+7. **Búsqueda de propinas:**
+   - Facilita la búsqueda de propinas anteriores por monto o fecha.
 
 # Funciones específicas:
 
@@ -47,26 +38,48 @@ Cuando vamos a un restaurante, a menudo se nos presenta la necesidad de calcular
 3. **`dividir_total(total, personas)`**:
    - Entrada: monto total (con propina) y número de personas.
    - Salida: monto que le corresponde a cada persona.
-4. **`mostrar_resultados(propina, total, total_persona)`**:
-   - Entrada: monto de la propina, total a pagar y monto por persona (si es aplicable).
-   - Salida: visualización de los resultados.
-
-
+4. **Sistema de almacenamiento:**
+   - Guarda los registros de propinas en formato JSON.
+   - Permite operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
+   - Facilita la búsqueda de registros históricos.
 
 # Menú Principal Simulador de Propina
 
 ```bash
 =============================================
-  SIMULADOR DE PROPINA
+           SIMULADOR DE PROPINA
 =============================================
 1. Calcular propina y total a pagar
 2. Calcular total a pagar divido entre varias personas
-3. Salir
+3. Gestionar registros de propinas
+4. Buscar propinas
+5. Salir
 =============================================
-Por favor, elige una opción (1-3):
+Por favor, elige una opción (1-5):
 ```
 
-------
+## **Si el usuario elige la opción 3 (Gestionar registros):**
+
+```bash
+=============================================
+        GESTIÓN DE PROPINAS
+=============================================
+1. Ver todas las propinas
+2. Agregar nueva propina
+3. Actualizar propina
+4. Eliminar propina
+5. Volver al menú principal
+=============================================
+```
+
+## **Si el usuario elige la opción 4 (Buscar propinas):**
+
+```bash
+=============================================
+        BÚSQUEDA DE PROPINAS
+=============================================
+Ingrese el término de búsqueda (o 'salir' para volver):
+```
 
 ## **Si el usuario elige la opción 1:**
 
@@ -104,7 +117,7 @@ Monto por persona: $___
 
 ------
 
-## **Si el usuario elige la opción 3:**
+## **Si el usuario elige la opción 5:**
 
 ```bash
 =============================================
@@ -116,12 +129,40 @@ Monto por persona: $___
 
 # **Flujo del Menú:**
 
-1. **Menú Principal**: El usuario puede elegir entre las tres opciones:
-   - Opción 1: Calcular la propina y el total a pagar.
-   - Opción 2: Calcular la propina y dividir la cuenta entre varias personas.
-   - Opción 3: Salir del programa.
-2. **Submenú de Cálculo de Propina**: Si elige la opción 1, el programa le pedirá ingresar el monto total de la cuenta y el porcentaje de propina. Luego, muestra el cálculo de la propina y el total a pagar.
-3. **Submenú de División de Cuenta**: Si elige la opción 2, se le solicitará el monto total de la cuenta, el porcentaje de propina y el número de personas. Luego, el programa mostrará cuánto le corresponde pagar a cada persona.
-4. **Salir**: Si elige la opción 3, el programa termina.
+1. **Menú Principal**: El usuario puede elegir entre cinco opciones:
+   - Opción 1: Calcular la propina y el total a pagar
+   - Opción 2: Calcular la propina y dividir la cuenta
+   - Opción 3: Gestionar registros de propinas (CRUD)
+   - Opción 4: Buscar propinas anteriores
+   - Opción 5: Salir del programa
+2. **Submenú de Cálculo de Propina**: Permite calcular propinas individuales
+3. **Submenú de División de Cuenta**: Calcula propinas y divide entre personas
+4. **Submenú de Gestión**: Permite administrar los registros de propinas
+   - Ver todas las propinas guardadas
+   - Agregar nuevos registros
+   - Actualizar registros existentes
+   - Eliminar registros
+5. **Submenú de Búsqueda**: Facilita la búsqueda de propinas anteriores
+6. **Salir**: Termina el programa
+
+# Estructura de Datos
+
+Los registros de propinas se almacenan en formato JSON con la siguiente estructura:
+
+```json
+{
+    "id": 1,
+    "total": 100.0,
+    "porcentaje": 15,
+    "propina": 15.0,
+    "fecha": "2024-03-20 10:30:00"
+}
+```
+
+# Requisitos del Sistema
+
+- Python 3.x
+- Sistema de archivos con permisos de escritura para almacenar el archivo JSON
+- Directorio 'data' en la raíz del proyecto para almacenamiento
 
 
